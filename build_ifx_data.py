@@ -3,7 +3,7 @@
 # the live picklists. Pass (1) / fail (0) marks come straight from the CASE(...) blocks in the rules.
 # If the guide and the org disagree, the guide is wrong - regenerate it.
 
-LIGHT = ("Light path: a Cyber Essentials or Pen Testing deal under £5k skips the MEDDPICC grades "
+LIGHT = ("Light path: any deal over £0 and under £5k skips the MEDDPICC grades "
          "(the deal shows Transactional Deal = true). Renewals, such as LIMA licence renewals, skip this gate entirely.")
 
 STAGES = [

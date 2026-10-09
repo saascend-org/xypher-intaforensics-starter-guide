@@ -310,7 +310,7 @@ HTML = f'''<!doctype html>
   <div class="stagepick" id="stagepick">{PICK}</div>
   <div class="stagebox" id="stagebox"></div>
   <div class="note" style="margin-top:16px"><span class="tag">The light path</span>
-    <p>Cyber Essentials and Pen Testing deals under &pound;5k, and renewals (LIMA licences, for example), skip the
+    <p>Any deal over &pound;0 and under &pound;5k, and renewals (LIMA licences, for example), skip the
     MEDDPICC grades. They still need Service Line, Funding Route, a Next Step and the closing fields.</p></div>
 </section>
 
