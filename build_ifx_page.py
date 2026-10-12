@@ -69,14 +69,21 @@ ORDER = [
 ]
 
 CLOSE = [
- step(1,'c1','Fill the closing fields in Details first','Before you touch the stage',
-   '<p>Open the deal&rsquo;s <strong>Details</strong>, click the pencil, and fill <strong>Contract / PO Number</strong> '
+ step(1,'c1','Record the client&rsquo;s yes','Negotiation fields: needed to leave Negotiation',
+   '<p>A deal cannot leave <strong>Negotiation / Commercial Agreement</strong> (except to Closed Lost) until '
+   'you record the commitment. Open <strong>Details</strong>, click the pencil, and fill <strong>Verbal Commit Date</strong>, '
+   '<strong>Verbal Commit Evidence</strong> (the email or minuted award &mdash; e.g. &ldquo;client emailed award 10 Oct&rdquo;), '
+   '<strong>Paper Process Status</strong> and <strong>Legal Review Status</strong> &mdash; neither may be Not Started; '
+   '<strong>Not Required</strong> counts if it is true. Renewals and deals under &pound;5k need these too.</p>'),
+ step(2,'c2','Fill the closing fields','Needed for Closed Won',
+   '<p>In the same edit, fill <strong>Contract / PO Number</strong> '
    '(the case reference will do), <strong>Signed Date</strong>, <strong>Contract Start Date</strong>, '
-   '<strong>Win Reason</strong> and either <strong>Contract End Date</strong> or tick <strong>One-Time Deal</strong>. Save.</p>'),
- step(2,'c2','Close it from the path','Closed, then Closed Won',
+   '<strong>Win Reason</strong> and either <strong>Contract End Date</strong> (renewals: the end of this term, so the next renewal is created) '
+   'or tick <strong>One-Time Deal</strong>. Save.</p>'),
+ step(3,'c3','Close it from the path','Closed, then Closed Won',
    '<p>On the stage path at the top of the deal choose <strong>Closed</strong>, then <strong>Closed Won</strong>. '
    'If a field is missing, the box tells you which.</p>'),
- step(3,'c3','Salesforce tells the team','No email from you, no invoice',
+ step(4,'c4','Salesforce tells the team','No email from you, no invoice',
    '<p>Salesforce emails <strong>submissions@</strong> and <strong>accounts@</strong>, plus the department head for the '
    'service line: Digital Forensics &rsaquo; Jake Blythe, Cell Site &rsaquo; Steve Hatton, Digital Investigation &rsaquo; '
    'Simon Young, eDiscovery &rsaquo; Lisa Washer and ediscovery@, LIMA &rsaquo; Kyle Horner. It never raises an invoice. '
@@ -293,7 +300,7 @@ HTML = f'''<!doctype html>
 
 <section id="closing">
   <h2>When a case is awarded</h2>
-  <p class="dek">Fill the closing fields, close it from the path, and Salesforce tells submissions, accounts and the department head.</p>
+  <p class="dek">Record the client&rsquo;s yes, fill the closing fields, close it from the path, and Salesforce tells submissions, accounts and the department head.</p>
   <ul class="steps">{''.join(CLOSE)}</ul>
 </section>
 
