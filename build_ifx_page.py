@@ -69,25 +69,47 @@ ORDER = [
 ]
 
 CLOSE = [
- step(1,'c1','Record the client&rsquo;s yes','Negotiation fields: needed to leave Negotiation',
-   '<p>A deal cannot leave <strong>Negotiation / Commercial Agreement</strong> (except to Closed Lost) until '
-   'you record the commitment. Open <strong>Details</strong>, click the pencil, and fill <strong>Verbal Commit Date</strong>, '
-   '<strong>Verbal Commit Evidence</strong> (the email or minuted award &mdash; e.g. &ldquo;client emailed award 10 Oct&rdquo;), '
-   '<strong>Paper Process Status</strong> and <strong>Legal Review Status</strong> &mdash; neither may be Not Started; '
-   '<strong>Not Required</strong> counts if it is true. Renewals and deals under &pound;5k need these too.</p>'),
- step(2,'c2','Fill the closing fields','Needed for Closed Won',
-   '<p>In the same edit, fill <strong>Contract / PO Number</strong> '
-   '(the case reference will do), <strong>Signed Date</strong>, <strong>Contract Start Date</strong>, '
-   '<strong>Win Reason</strong> and either <strong>Contract End Date</strong> (renewals: the end of this term, so the next renewal is created) '
-   'or tick <strong>One-Time Deal</strong>. Save.</p>'),
- step(3,'c3','Close it from the path','Closed, then Closed Won',
-   '<p>On the stage path at the top of the deal choose <strong>Closed</strong>, then <strong>Closed Won</strong>. '
-   'If a field is missing, the box tells you which.</p>'),
- step(4,'c4','Salesforce tells the team','No email from you, no invoice',
-   '<p>Salesforce emails <strong>submissions@</strong> and <strong>accounts@</strong>, plus the department head for the '
-   'service line: Digital Forensics &rsaquo; Jake Blythe, Cell Site &rsaquo; Steve Hatton, Digital Investigation &rsaquo; '
-   'Simon Young, eDiscovery &rsaquo; Lisa Washer and ediscovery@, LIMA &rsaquo; Kyle Horner. It never raises an invoice. '
-   'The email goes once &mdash; editing a won deal afterwards does not send it again.</p>'),
+ step(1,'c1','Choose Closed, then Closed Won','The stage path opens the case form',
+   '<p>On the stage path at the top of the case choose <strong>Closed</strong>, then <strong>Select Closed Stage</strong> '
+   '&rsaquo; <strong>Closed Won</strong> &rsaquo; <strong>Next</strong>. The <strong>Close Won - Case Details</strong> form opens. '
+   'It has five short steps and <strong>nothing is saved until you click Finish</strong> on the last one. '
+   'Have the signed estimate to hand - you upload it at the end.</p>'
+   + path('Case','>','!Closed','>','Select Closed Stage','>','!Closed Won','>','Next')),
+ step(2,'c2','Step 1 - Award','External reference, dates, win reason',
+   '<p><strong>External reference</strong> is the client&rsquo;s case reference (e.g. FA-2026-20705). Check the '
+   '<strong>Signed date</strong> and <strong>Contract start date</strong> (both default to today) and pick a '
+   '<strong>Win reason</strong>. <strong>One-off case</strong> is ticked - untick it only for an ongoing contract, then give '
+   'the end date. If the case is at <strong>Negotiation</strong>, four sign-off fields appear here too: verbal commit date '
+   'and evidence (the signed estimate counts), paper process and legal review.</p>'),
+ step(3,'c3','Step 2 - Case details','Case type, offence, funding',
+   '<p><strong>Case type</strong> (Digital Forensics, Video Forensics, Cell Site Analysis or Digital Investigation) and '
+   '<strong>Funding</strong> are filled in from the products on the case - change them if they are wrong. Pick the '
+   '<strong>Offence type</strong> (the LIMA list), CPS permissions if known, and the operation name and crime number if '
+   'there are any. The <strong>Case contact</strong> is the solicitor or client on the case - the primary contact is '
+   'already chosen.</p>'),
+ step(4,'c4','Step 3 - Instruction','Background, instructions, suspects, deadlines, OIC',
+   '<p><strong>Background to instruction</strong> starts from the scope you wrote on the proposal. Add the '
+   '<strong>Objective / instructions for the expert</strong>, the <strong>Work deadline</strong> and the trial date if set. '
+   'Write each suspect on its own line as <strong>SURNAME, First name</strong> - the form refuses a name without the comma. '
+   'Add the officer in the case (OIC) if there is one.</p>'),
+ step(5,'c5','Step 4 - Devices','And Cell Site parameters on Cell Site cases',
+   '<p>Give the <strong>Number of devices</strong> (0 for a data-only case), then the make and model of each, one per line, '
+   'and where the devices are now. Choosing <strong>On-site examination</strong> asks for the address. On a '
+   '<strong>Cell Site</strong> case, also fill the locations of interest, the numbers and networks (one per line: '
+   'number - network), the date and time period, and whether the call data records are in.</p>'),
+ step(6,'c6','Step 5 - Quote and documents, then Finish','Hours, rate, travel and TRT are required',
+   '<p><strong>Quoted hours</strong>, <strong>hourly rate</strong> and <strong>travel costs</strong> are filled in from the '
+   'products - check them. Pick the <strong>Quoted TRT</strong> (5, 10, 25 or 30 working days, or Other and give the number). '
+   'Check the <strong>Credit terms</strong>, then <strong>upload the signed estimate</strong> and any case bundle. '
+   'The case cannot close until at least one document is on it. Click <strong>Finish</strong>.</p>'),
+ step(7,'c7','Salesforce tells Submissions','No email from you, no invoice',
+   '<p>The case moves to Closed Won and Salesforce emails <strong>submissions@</strong> and the department head for the '
+   'case type - Digital Forensics, Video Forensics and Digital Investigation &rsaquo; Jake Blythe; Cell Site &rsaquo; '
+   'Steve Hatton; eDiscovery &rsaquo; Lisa Washer and ediscovery@; LIMA &rsaquo; Kyle Horner - with a copy to you. '
+   'It lists everything from the form, with links to the documents, so the case can be opened on LIMA straight away. '
+   'Suspect names, crime number, OIC and Cell Site numbers are <strong>wiped from Salesforce 28 days later</strong>; LIMA '
+   'is the record after that. If the last screen says the email could not be sent, forward the details to Submissions '
+   'yourself and tell your Salesforce admin.</p>'),
 ]
 
 TIDY = [
@@ -300,7 +322,7 @@ HTML = f'''<!doctype html>
 
 <section id="closing">
   <h2>When a case is awarded</h2>
-  <p class="dek">Record the client&rsquo;s yes, fill the closing fields, close it from the path, and Salesforce tells submissions, accounts and the department head.</p>
+  <p class="dek">Close it from the path and fill the five-step case form. Salesforce sends Submissions everything they need to open the case on LIMA.</p>
   <ul class="steps">{''.join(CLOSE)}</ul>
 </section>
 
